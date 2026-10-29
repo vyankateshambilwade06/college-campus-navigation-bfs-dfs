@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MGM University CampusPath | Campus Navigation</title>
+<style>
+:root{--navy:#10223d;--blue:#356df3;--mint:#dff8ed;--bg:#f4f7fb;--text:#17263c;--muted:#66758a;--line:#e2e8f0;--card:#fff;--orange:#ffb454}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+header{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:-.4px}.logo{width:40px;height:40px;border-radius:13px;background:var(--blue);display:grid;place-items:center;color:white;font-size:22px;box-shadow:0 8px 20px #356df333}
+.badge{font-size:12px;font-weight:700;color:#24654a;background:var(--mint);padding:8px 12px;border-radius:99px}
+main{max-width:1240px;margin:0 auto;padding:34px 24px 48px}.hero{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:25px}.eyebrow{text-transform:uppercase;letter-spacing:1.8px;font-size:11px;font-weight:800;color:var(--blue)}h1{font-size:clamp(30px,4vw,45px);letter-spacing:-1.8px;line-height:1.08;margin:10px 0 12px;color:var(--navy)}.hero p{color:var(--muted);max-width:600px;line-height:1.65;margin:0}.stat{background:#fff;border:1px solid var(--line);padding:15px 19px;border-radius:17px;min-width:150px;box-shadow:0 8px 24px #19345b08}.stat strong{display:block;font-size:24px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:22px;align-items:start}.panel,.map-panel{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 12px 35px #19345b08}.panel{padding:23px}.section-title{font-size:16px;font-weight:800;margin:0 0 5px}.sub{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 20px}
+label{font-size:12px;font-weight:800;display:block;margin:15px 0 8px;color:#40516a}select{width:100%;padding:13px 12px;border:1px solid #d9e1ed;border-radius:12px;background:#fbfcff;color:var(--text);font:inherit;font-size:14px;outline:none}select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #356df31b}.btn{border:0;border-radius:12px;padding:13px 15px;font:inherit;font-weight:800;cursor:pointer;transition:.15s}.btn-primary{background:var(--blue);color:#fff;width:100%;margin-top:17px;box-shadow:0 9px 18px #356df32b}.btn-primary:hover{transform:translateY(-1px);background:#245be2}.btn-secondary{background:#eef3ff;color:#2d5dd2}.btn:focus-visible{outline:3px solid #91b4ff;outline-offset:2px}.swap{display:flex;justify-content:flex-end;margin-top:7px}.swap button{background:none;border:0;color:var(--blue);font-weight:800;font-size:12px;cursor:pointer}.route-result{display:none;margin-top:20px;padding:17px;border-radius:15px;background:#f3f7ff;border:1px solid #dbe7ff}.route-result.show{display:block}.route-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.route-head strong{font-size:13px}.distance{font-size:12px;font-weight:800;color:#245bd7;background:#e0eaff;padding:7px 9px;border-radius:99px;white-space:nowrap}.route-list{list-style:none;margin:16px 0 0;padding:0;counter-reset:steps}.route-list li{counter-increment:steps;position:relative;padding:0 0 16px 32px;font-size:13px;color:#3d4f68}.route-list li:before{content:counter(steps);position:absolute;left:0;top:-2px;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid #c9d8ff;color:#285ed7;font-size:11px;font-weight:800;display:grid;place-items:center}.route-list li:not(:last-child):after{content:"";position:absolute;left:10px;top:22px;height:calc(100% - 18px);border-left:2px dashed #b9ccf6}.route-list li:last-child{padding-bottom:0}.hint{font-size:11px;color:var(--muted);margin-top:16px;line-height:1.55}.map-panel{padding:22px;overflow:hidden}.map-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}.map-top h2{font-size:18px;margin:0 0 5px}.map-top p{font-size:12px;color:var(--muted);margin:0}.real-map-link{display:inline-block;margin-top:9px;font-size:12px;font-weight:800;color:var(--blue);text-decoration:none}.real-map-link:hover{text-decoration:underline}.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--muted)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--blue)}.dot.green{background:#20b981}.dot.orange{background:var(--orange)}.map-wrap{position:relative;width:100%;border-radius:17px;overflow:hidden;background:#f6f9fd;border:1px solid #e6edf6}.map-wrap svg{display:block;width:100%;height:auto;min-height:360px}.map-bg{fill:#f7f9fc}.park{fill:#dff4e8;stroke:#c8e9d7;stroke-width:1}.road{fill:none;stroke:#e2e8f0;stroke-width:27;stroke-linecap:round;stroke-linejoin:round}.road-center{fill:none;stroke:#fff;stroke-width:3;stroke-dasharray:5 8;stroke-linecap:round}.edge{stroke:#c7d3e3;stroke-width:3;fill:none}.edge.active{stroke:#356df3;stroke-width:6;stroke-linecap:round;filter:drop-shadow(0 2px 2px #356df333)}.node{cursor:pointer}.node rect{fill:#fff;stroke:#d6dfeb;stroke-width:1.5;filter:drop-shadow(0 4px 5px #1d355711);rx:11}.node text{font-size:11px;font-weight:750;fill:#30415a;text-anchor:middle;pointer-events:none}.node .icon{font-size:16px}.node.start rect{stroke:#20b981;stroke-width:2.5;fill:#f0fff8}.node.end rect{stroke:#356df3;stroke-width:2.5;fill:#f1f5ff}.node.route rect{stroke:#356df3;stroke-width:2.5}.node:hover rect{stroke:#356df3}.map-caption{display:flex;justify-content:space-between;gap:10px;margin-top:13px;color:var(--muted);font-size:11px}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}.info-card{padding:21px;background:#fff;border:1px solid var(--line);border-radius:19px}.info-card h3{margin:0 0 12px;font-size:15px}.location-list{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);background:#f8faff;padding:8px 10px;border-radius:10px;font-size:12px;color:#40516a}.tech-list{display:flex;flex-wrap:wrap;gap:8px}.tech{background:#eef3ff;color:#2d5dd2;font-weight:800;font-size:11px;padding:8px 10px;border-radius:9px}.footer{text-align:center;color:#8a96a8;font-size:11px;margin-top:25px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.stat{display:none}.bottom-grid{grid-template-columns:1fr}.panel{order:1}.map-panel{order:2}.map-wrap svg{min-height:300px}}
+@media(max-width:500px){header{padding:0 18px;height:65px}.brand{font-size:17px}.badge{font-size:10px;padding:7px 9px}main{padding:25px 14px}.panel,.map-panel{padding:17px}.map-top{flex-direction:column}.map-wrap svg{min-height:250px}.map-caption{flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">⌖</div><span>MGM University CampusPath</span></div>
+  <div class="badge">● DSA Mini Project</div>
+</header>
+<main>
+  <section class="hero">
+    <div><div class="eyebrow">MGM University · Chhatrapati Sambhajinagar</div><h1>Find your way<br>around campus.</h1><p>Explore a demo campus map for MGM University and nearby campus facilities. Choose any two locations to discover a shortest route calculated using a weighted graph and Dijkstra’s algorithm.</p></div>
+    <div class="stat"><strong id="placeCount">8 places</strong><span>connected campus locations</span></div>
+  </section>
+  <section class="layout">
+    <aside class="panel">
+      <h2 class="section-title">Plan your route</h2><p class="sub">Pick where you're starting and where you need to go.</p>
+      <label for="start">STARTING LOCATION</label><select id="start"></select>
+      <div class="swap"><button id="swap" type="button">↕ Swap locations</button></div>
+      <label for="destination">DESTINATION</label><select id="destination"></select>
+      <button class="btn btn-primary" id="findRoute" type="button">⌁ Find shortest route (Dijkstra)</button>
+      <div class="route-result" id="routeResult" aria-live="polite"></div>
+      <div style="border-top:1px solid var(--line);margin-top:20px;padding-top:18px">
+        <h3 style="font-size:14px;margin:0 0 6px">Explore graph traversal</h3>
+        <p class="sub" style="margin-bottom:12px">Run BFS or DFS from the selected starting location to see the order in which locations are visited.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+          <button class="btn btn-secondary" id="runBFS" type="button">▶ Run BFS</button>
+          <button class="btn btn-secondary" id="runDFS" type="button">▶ Run DFS</button>
+        </div>
+        <div class="route-result" id="traversalResult" aria-live="polite"></div>
+      </div>
+      <p class="hint">Demo note: distances are sample values, not live measurements. Click any building on the map to select it as your destination.</p>
+    </aside>
+    <section class="map-panel">
+      <div class="map-top"><div><h2>MGM University campus map</h2><p>Illustrative layout · Select a building to navigate</p><a class="real-map-link" href="https://www.google.com/maps/search/?api=1&query=MGM+University+Chhatrapati+Sambhajinagar+Maharashtra" target="_blank" rel="noopener noreferrer">↗ View MGM University on Google Maps</a></div><div class="legend"><span><i class="dot green"></i>Start</span><span><i class="dot"></i>Destination</span><span><i class="dot orange"></i>Campus path</span></div></div>
+      <div class="map-wrap">
+        <svg id="campusMap" viewBox="0 0 760 510" role="img" aria-label="Illustrative college campus map with connected buildings">
+          <rect class="map-bg" width="760" height="510"/>
+          <path class="park" d="M490 28 Q650 10 730 95 L720 205 Q650 230 570 170Z"/>
+          <path class="park" d="M30 340 Q85 295 170 335 L200 445 Q115 490 40 440Z"/>
+          <text x="625" y="66" fill="#6ba58a" font-size="12" font-weight="700" text-anchor="middle">GREEN ZONE</text>
+          <text x="112" y="430" fill="#6ba58a" font-size="12" font-weight="700" text-anchor="middle">GARDEN</text>
+          <g id="roads"></g><g id="routeEdges"></g><g id="nodes"></g>
+        </svg>
+      </div>
+      <div class="map-caption"><span>● Graph nodes = buildings &nbsp; · &nbsp; Lines = walkable paths</span><span id="mapStatus">Ready to navigate</span></div>
+    </section>
+  </section>
+  <section class="bottom-grid">
+    <div class="info-card"><h3>Campus locations</h3><div class="location-list" id="locationChips"></div></div>
+    <div class="info-card"><h3>Data structures in this project</h3><div class="tech-list"><span class="tech">Weighted Graph</span><span class="tech">Adjacency List</span><span class="tech">Priority Queue</span><span class="tech">Dijkstra’s Algorithm</span><span class="tech">BFS · Queue</span><span class="tech">DFS · Stack / Recursion</span></div><p class="hint">The graph stores each location and its connected paths. Dijkstra’s algorithm finds the minimum-distance route using a priority queue.</p></div>
+  </section>
+  <div class="footer">MGM University CampusPath · Data Structures mini project · Demo paths and distances are illustrative</div>
+</main>
+<script>
+const campus = {
+ "Main Gate":{"Parking":100,"SOET":180},
+ "Parking":{"Main Gate":100,"Library":120,"Gym":170},
+ "Library":{"Parking":120,"SOET":90,"JNEC":160,"Rukmini Sabhagriha":210},
+ "SOET":{"Main Gate":180,"Library":90,"JNEC":110,"Gym":140},
+ "JNEC":{"SOET":110,"Library":160,"Rukmini Sabhagriha":130,"Swimming Pool":180},
+ "Rukmini Sabhagriha":{"Library":210,"JNEC":130,"Swimming Pool":100},
+ "Swimming Pool":{"JNEC":180,"Rukmini Sabhagriha":100,"Gym":120},
+ "Gym":{"Parking":170,"SOET":140,"Swimming Pool":120}
+};
+const coords = {
+ "Main Gate":[85,250],"Parking":[220,130],"Library":[365,120],
+ "SOET":[350,275],"JNEC":[520,200],"Rukmini Sabhagriha":[535,365],
+ "Swimming Pool":[680,300],"Gym":[205,405]
+};
+const icons={"Main Gate":"⌂","Parking":"P","Library":"▣","SOET":"⌘","JNEC":"▦","Rukmini Sabhagriha":"◇","Swimming Pool":"≈","Gym":"✚"};
+const $=id=>document.getElementById(id);
+const names=Object.keys(campus);
+function fillSelects(){
+  for(const id of ["start","destination"]){const sel=$(id);names.forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;sel.appendChild(o);});}
+  $("start").value="SOET";$("destination").value="JNEC";
+  $("placeCount").textContent=names.length+" places";
+  $("locationChips").innerHTML=names.map(n=>`<button class="chip" type="button" data-place="${n}">${icons[n]} &nbsp;${n}</button>`).join("");
+}
+function svgEl(tag,attrs={},text=""){const el=document.createElementNS("http://www.w3.org/2000/svg",tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));if(text)el.textContent=text;return el;}
+function drawMap(route=[]){
+ const roads=$("roads"),edges=$("routeEdges"),nodes=$("nodes");roads.innerHTML="";edges.innerHTML="";nodes.innerHTML="";
+ const drawn=new Set();
+ for(const [a,links] of Object.entries(campus)){for(const b of Object.keys(links)){const key=[a,b].sort().join("|");if(drawn.has(key))continue;drawn.add(key);const [x1,y1]=coords[a],[x2,y2]=coords[b];roads.appendChild(svgEl("path",{d:`M ${x1} ${y1} L ${x2} ${y2}`,class:"road"}));roads.appendChild(svgEl("path",{d:`M ${x1} ${y1} L ${x2} ${y2}`,class:"road-center"}));}}
+ const pathEdges=new Set();for(let i=0;i<route.length-1;i++)pathEdges.add([route[i],route[i+1]].sort().join("|"));
+ for(const key of pathEdges){const [a,b]=key.split("|");const [x1,y1]=coords[a],[x2,y2]=coords[b];edges.appendChild(svgEl("path",{d:`M ${x1} ${y1} L ${x2} ${y2}`,class:"edge active"}));}
+ names.forEach(n=>{const [x,y]=coords[n],g=svgEl("g",{class:"node"+(route[0]===n?" start":"")+(route[route.length-1]===n?" end":"")+(route.includes(n)?" route":""),tabindex:"0",role:"button","aria-label":n+"; click to set as destination","data-place":n});
+ g.appendChild(svgEl("rect",{x:x-51,y:y-29,width:102,height:58,rx:11}));g.appendChild(svgEl("text",{x,y:y-5,class:"icon"},icons[n]));g.appendChild(svgEl("text",{x,y:y+14},n));g.addEventListener("click",()=>{$("destination").value=n;findRoute();});g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();$("destination").value=n;findRoute();}});nodes.appendChild(g);});
+}
+function dijkstra(start,end){
+ const dist={},prev={},pq=[];names.forEach(n=>dist[n]=Infinity);dist[start]=0;pq.push([0,start]);
+ while(pq.length){pq.sort((a,b)=>a[0]-b[0]);const [d,u]=pq.shift();if(d!==dist[u])continue;if(u===end)break;for(const [v,w] of Object.entries(campus[u])){const nd=d+w;if(nd<dist[v]){dist[v]=nd;prev[v]=u;pq.push([nd,v]);}}}
+ if(!Number.isFinite(dist[end]))return null;const path=[];let cur=end;while(cur!==undefined){path.unshift(cur);cur=prev[cur];}return {path,distance:dist[end]};
+}
+function bfs(start){
+ const visited=new Set([start]), queue=[start], order=[];
+ while(queue.length){
+  const u=queue.shift();order.push(u);
+  for(const v of Object.keys(campus[u])){if(!visited.has(v)){visited.add(v);queue.push(v);}}
+ }
+ return order;
+}
+function dfs(start){
+ const visited=new Set(),order=[];
+ function visit(u){visited.add(u);order.push(u);for(const v of Object.keys(campus[u]))if(!visited.has(v))visit(v);}
+ visit(start);return order;
+}
+function showTraversal(kind){
+ const start=$("start").value;
+ const order=kind==="BFS"?bfs(start):dfs(start);
+ const box=$("traversalResult");box.classList.add("show");
+ box.innerHTML=`<div class="route-head"><strong>${kind} traversal order</strong><span class="distance">${order.length} visited</span></div><p class="hint" style="margin:8px 0 0">${kind==="BFS"?"Breadth-First Search visits nearby connected locations level by level using a queue.":"Depth-First Search follows one path as far as possible before backtracking, using a stack (here, recursion)."}</p><ol class="route-list">${order.map((n,i)=>`<li><strong>${n}</strong>${i===0?" — Start":""}</li>`).join("")}</ol>`;
+ drawMap(order);
+ $("mapStatus").textContent=`${kind} traversal · ${order.length} locations visited`;
+}
+function findRoute(){
+ const start=$("start").value,end=$("destination").value;
+ if(start===end){$("routeResult").classList.add("show");$("routeResult").innerHTML=`<div class="route-head"><strong>You're already there!</strong><span class="distance">0 m</span></div><p class="hint">Your starting point and destination are the same.</p>`;drawMap([start]);$("mapStatus").textContent="Same starting point and destination";return;}
+ const result=dijkstra(start,end);const box=$("routeResult");box.classList.add("show");
+ if(!result){box.innerHTML="<strong>No route found</strong>";drawMap([]);return;}
+ box.innerHTML=`<div class="route-head"><strong>Shortest route found</strong><span class="distance">${result.distance} m</span></div><p class="hint" style="margin:8px 0 0">Estimated walking distance · ${result.path.length-1} path segments</p><ol class="route-list">${result.path.map((n,i)=>`<li><strong>${n}</strong>${i===0?" — Start":i===result.path.length-1?" — Destination":""}</li>`).join("")}</ol>`;
+ drawMap(result.path);$("mapStatus").textContent=`${result.distance} m · ${result.path.length} locations`;
+}
+$("findRoute").addEventListener("click",findRoute);
+$("runBFS").addEventListener("click",()=>showTraversal("BFS"));
+$("runDFS").addEventListener("click",()=>showTraversal("DFS"));
+$("swap").addEventListener("click",()=>{const a=$("start").value;$("start").value=$("destination").value;$("destination").value=a;findRoute();});
+$("start").addEventListener("change",findRoute);$("destination").addEventListener("change",findRoute);
+$("locationChips").addEventListener("click",e=>{const b=e.target.closest("[data-place]");if(b){$("destination").value=b.dataset.place;findRoute();}});
+fillSelects();findRoute();
+</script>
+</body>
+</html>
